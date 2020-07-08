@@ -1,6 +1,7 @@
 import { interpolate } from 'polymorph-js';
 import TWEEN from '@tweenjs/tween.js';
 import FunnelGraph from 'funnel-graph-js';
+import { formatNumber } from 'funnel-graph-js/src/js/number';
 import { getDefaultColors, generateLegendBackground } from 'funnel-graph-js/src/js/graph';
 import 'funnel-graph-js/src/scss/main.scss';
 import 'funnel-graph-js/src/scss/theme.scss';
@@ -52,9 +53,9 @@ var script = {
     computed: {
         valuesFormatted: function valuesFormatted() {
             if (this.graph.is2d()) {
-                return this.graph.getValues2d().map(function (value) { return value; });
+                return this.graph.getValues2d().map(function (value) { return Number.isInteger(value)? formatNumber(value): value; });
             }
-            return this.values.map(function (value) { return value; });
+            return this.values.map(function (value) { return Number.isInteger(value)? formatNumber(value): value; });
         },
         colorSet: function colorSet() {
             var colorSet = [];
@@ -216,7 +217,7 @@ var script = {
     },
     filters: {
         format: function (value) {
-            return value
+            return Number.isInteger(value)? formatNumber(value): value
         }
     }
 };
@@ -360,17 +361,17 @@ var browser = createInjector;
 var __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"funnel svg-funnel-js",class:{'svg-funnel-js--vertical': _vm.direction === 'vertical'}},[_c('div',{staticClass:"svg-funnel-js__container"},[_c('svg',{attrs:{"width":_vm.width,"height":_vm.height}},[_c('defs',_vm._l((_vm.gradientSet),function(colors,index){return _c('linearGradient',{key:index,attrs:{"id":("funnelGradient-" + ((index+1))),"gradientTransform":_vm.gradientAngle}},_vm._l((colors.values),function(color,index){return _c('stop',{key:index,attrs:{"stop-color":color,"offset":_vm.offsetColor(index, colors.values.length)}})}),1)}),1),_vm._v(" "),_vm._l((_vm.paths),function(path,index){return _c('path',{key:index,attrs:{"fill":_vm.colorSet[index].fill,"stroke":_vm.colorSet[index].fill,"d":path}})})],2)]),_vm._v(" "),_c('transition-group',{staticClass:"svg-funnel-js__labels",attrs:{"name":"appear","tag":"div"},on:{"enter":_vm.enterTransition,"leave":_vm.leaveTransition}},_vm._l((_vm.valuesFormatted),function(value,index){return _c('div',{key:_vm.labels[index].toLowerCase().split(' ').join('-'),staticClass:"svg-funnel-js__label",class:("label-" + ((index+1)))},[_c('div',{staticClass:"label__value"},[_vm._v(_vm._s(value))]),_vm._v(" "),(_vm.labels)?_c('div',{staticClass:"label__title"},[_vm._v(_vm._s(_vm.labels[index]))]):_vm._e(),_vm._v(" "),(_vm.displayPercentage && _vm.percentages()[index] !== 100)?_c('div',{staticClass:"label__percentage"},[_vm._v("\n                "+_vm._s(_vm.percentages()[index])+"%\n            ")]):_vm._e(),_vm._v(" "),(_vm.is2d())?_c('div',{staticClass:"label__segment-percentages"},[_c('ul',{staticClass:"segment-percentage__list"},_vm._l((_vm.subLabels),function(subLabel,j){return _c('li',{key:j},[_vm._v("\n                        "+_vm._s(subLabel)+":\n                        "),(_vm.subLabelValue === 'percent')?_c('span',{staticClass:"percentage__list-label"},[_vm._v(_vm._s(_vm.twoDimPercentages()[index][j])+"%")]):_c('span',{staticClass:"percentage__list-label"},[_vm._v(_vm._s(_vm._f("format")(_vm.values[index][j])))])])}),0)]):_vm._e()])}),0),_vm._v(" "),_c('transition',{attrs:{"name":"fade"},on:{"enter":_vm.enterTransition,"leave":_vm.leaveTransition}},[(_vm.is2d())?_c('div',{staticClass:"svg-funnel-js__subLabels"},_vm._l((_vm.subLabels),function(subLabel,index){return _c('div',{key:index,class:("svg-funnel-js__subLabel svg-funnel-js__subLabel-" + ((index + 1)))},[_c('div',{staticClass:"svg-funnel-js__subLabel--color",style:(_vm.subLabelBackgrounds(index))}),_vm._v(" "),_c('div',{staticClass:"svg-funnel-js__subLabel--title"},[_vm._v(_vm._s(subLabel))])])}),0):_vm._e()])],1)};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"funnel svg-funnel-js",class:{'svg-funnel-js--vertical': _vm.direction === 'vertical'}},[_c('div',{staticClass:"svg-funnel-js__container"},[_c('svg',{attrs:{"width":_vm.width,"height":_vm.height}},[_c('defs',_vm._l((_vm.gradientSet),function(colors,index){return _c('linearGradient',{key:index,attrs:{"id":("funnelGradient-" + ((index+1))),"gradientTransform":_vm.gradientAngle}},_vm._l((colors.values),function(color,index){return _c('stop',{key:index,attrs:{"stop-color":color,"offset":_vm.offsetColor(index, colors.values.length)}})}),1)}),1),_vm._v(" "),_vm._l((_vm.paths),function(path,index){return _c('path',{key:index,attrs:{"fill":_vm.colorSet[index].fill,"stroke":_vm.colorSet[index].fill,"d":path}})})],2)]),_vm._v(" "),_c('transition-group',{staticClass:"svg-funnel-js__labels",attrs:{"name":"appear","tag":"div"},on:{"enter":_vm.enterTransition,"leave":_vm.leaveTransition}},_vm._l((_vm.valuesFormatted),function(value,index){return _c('div',{key:_vm.labels[index].toLowerCase().split(' ').join('-'),staticClass:"svg-funnel-js__label",class:("label-" + ((index+1)))},[_c('div',{staticClass:"label__value"},[_vm._v(_vm._s(value))]),_vm._v(" "),(_vm.labels && _vm.labels[index].toString().includes('⬇'))?_c('div',{staticClass:"label__title",staticStyle:{"color":"red"}},[_vm._v(_vm._s(_vm.labels[index]))]):(_vm.labels)?_c('div',{staticClass:"label__title"},[_vm._v(_vm._s(_vm.labels[index]))]):_vm._e(),_vm._v(" "),(_vm.displayPercentage && _vm.percentages()[index] !== 100)?_c('div',{staticClass:"label__percentage"},[_vm._v("\n                "+_vm._s(_vm.percentages()[index])+"%\n            ")]):_vm._e(),_vm._v(" "),(_vm.is2d())?_c('div',{staticClass:"label__segment-percentages"},[_c('ul',{staticClass:"segment-percentage__list"},_vm._l((_vm.subLabels),function(subLabel,j){return _c('li',{key:j},[_vm._v("\n                        "+_vm._s(subLabel)+":\n                        "),(_vm.subLabelValue === 'percent')?_c('span',{staticClass:"percentage__list-label"},[_vm._v(_vm._s(_vm.twoDimPercentages()[index][j])+"%")]):_c('span',{staticClass:"percentage__list-label"},[_vm._v(_vm._s(_vm._f("format")(_vm.values[index][j])))])])}),0)]):_vm._e()])}),0)],1)};
 var __vue_staticRenderFns__ = [];
 
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) { return }
-    inject("data-v-4cae0a78_0", { source: ".appear-enter-active[data-v-4cae0a78],.appear-leave-active[data-v-4cae0a78]{transition:all .7s ease-in-out}.appear-enter-to[data-v-4cae0a78],.appear-leave[data-v-4cae0a78]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-4cae0a78],.appear-leave-to[data-v-4cae0a78]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-4cae0a78],.fade-leave-active[data-v-4cae0a78]{transition:all .3s ease}.fade-enter-to[data-v-4cae0a78],.fade-leave[data-v-4cae0a78]{opacity:1}.fade-enter[data-v-4cae0a78],.fade-leave-to[data-v-4cae0a78]{opacity:0}", map: undefined, media: undefined });
+    inject("data-v-def9a444_0", { source: ".appear-enter-active[data-v-def9a444],.appear-leave-active[data-v-def9a444]{transition:all .7s ease-in-out}.appear-enter-to[data-v-def9a444],.appear-leave[data-v-def9a444]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-def9a444],.appear-leave-to[data-v-def9a444]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-def9a444],.fade-leave-active[data-v-def9a444]{transition:all .3s ease}.fade-enter-to[data-v-def9a444],.fade-leave[data-v-def9a444]{opacity:1}.fade-enter[data-v-def9a444],.fade-leave-to[data-v-def9a444]{opacity:0}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  var __vue_scope_id__ = "data-v-4cae0a78";
+  var __vue_scope_id__ = "data-v-def9a444";
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */

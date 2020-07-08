@@ -27,7 +27,8 @@
                  v-for="(value, index) in valuesFormatted" :key="labels[index].toLowerCase().split(' ').join('-')"
             >
                 <div class="label__value">{{ value }}</div>
-                <div class="label__title" v-if="labels">{{ labels[index] }}</div>
+                <div class="label__title" v-if="labels && labels[index].toString().includes('⬇')" style="color:red;">{{ labels[index] }}</div>
+                <div class="label__title" v-else-if="labels">{{ labels[index] }}</div>
                 <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100">
                     {{ percentages()[index] }}%
                 </div>
@@ -42,18 +43,6 @@
                 </div>
             </div>
         </transition-group>
-        <transition name="fade" v-on:enter="enterTransition" v-on:leave="leaveTransition">
-            <div class="svg-funnel-js__subLabels" v-if="is2d()">
-                <div :class="`svg-funnel-js__subLabel svg-funnel-js__subLabel-${(index + 1)}`"
-                     v-for="(subLabel, index) in subLabels"
-                     :key="index"
-                >
-                    <div class="svg-funnel-js__subLabel--color"
-                         :style="subLabelBackgrounds(index)"></div>
-                    <div class="svg-funnel-js__subLabel--title">{{ subLabel }}</div>
-                </div>
-            </div>
-        </transition>
     </div>
 </template>
 
@@ -61,6 +50,7 @@
     import { interpolate } from 'polymorph-js';
     import TWEEN from '@tweenjs/tween.js';
     import FunnelGraph from 'funnel-graph-js';
+    import { formatNumber } from 'funnel-graph-js/src/js/number';
     import { getDefaultColors, generateLegendBackground } from 'funnel-graph-js/src/js/graph';
     import 'funnel-graph-js/src/scss/main.scss';
     import 'funnel-graph-js/src/scss/theme.scss';
@@ -110,8 +100,10 @@
         computed: {
             valuesFormatted() {
                 if (this.graph.is2d()) {
-                    return this.graph.getValues2d().map(value => value);
+                    return this.graph.getValues2d().map(value => Number.isInteger(value)? formatNumber(value): value);
                 }
+                return this.values.map(value => Number.isInteger(value)? formatNumber(value): value);
+
                 return this.values.map(value => value);
             },
             colorSet() {
@@ -270,7 +262,7 @@
         },
         filters: {
             format: function (value) {
-                return value
+                return Number.isInteger(value)? formatNumber(value): value
             }
         }
     };
