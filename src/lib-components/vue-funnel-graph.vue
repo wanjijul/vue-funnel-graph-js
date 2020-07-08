@@ -26,9 +26,10 @@
             <div class="svg-funnel-js__label" :class="`label-${(index+1)}`"
                  v-for="(value, index) in valuesFormatted" :key="labels[index].toLowerCase().split(' ').join('-')"
             >
-                <div class="label__value">{{ value }}</div>
+                <div class="label__value" style="color:black;">{{ value }}</div>
                 <div class="label__title" v-if="labels && labels[index].toString().includes('⬇')" style="color:#DD2C00;">{{ labels[index] }}</div>
-                <div class="label__title" v-else-if="labels" style="color:#43A047;">{{ labels[index] }}</div>
+                <div class="label__title" v-else-if="labels && labels[index].toString().includes('⬆')" style="color:#43A047;">{{ labels[index] }}</div>
+                <div class="label__title" v-else-if="labels" style="color:black;">{{ labels[index] }}</div>
                 <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100" style="color:#5DA8DC;">
                     {{ percentages()[index] }}%
                 </div>
