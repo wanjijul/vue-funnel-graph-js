@@ -61,7 +61,6 @@
     import { interpolate } from 'polymorph-js';
     import TWEEN from '@tweenjs/tween.js';
     import FunnelGraph from 'funnel-graph-js';
-    import { formatNumber } from 'funnel-graph-js/src/js/number';
     import { getDefaultColors, generateLegendBackground } from 'funnel-graph-js/src/js/graph';
     import 'funnel-graph-js/src/scss/main.scss';
     import 'funnel-graph-js/src/scss/theme.scss';
@@ -111,9 +110,9 @@
         computed: {
             valuesFormatted() {
                 if (this.graph.is2d()) {
-                    return this.graph.getValues2d().map(value => formatNumber(value));
+                    return this.graph.getValues2d().map(value => value);
                 }
-                return this.values.map(value => formatNumber(value));
+                return this.values.map(value => value);
             },
             colorSet() {
                 const colorSet = [];
@@ -271,7 +270,7 @@
         },
         filters: {
             format: function (value) {
-                return formatNumber(value)
+                return value
             }
         }
     };
