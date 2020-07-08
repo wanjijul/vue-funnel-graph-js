@@ -1,11 +1,11 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('polymorph-js'), require('@tweenjs/tween.js'), require('funnel-graph-js'), require('funnel-graph-js/src/js/number'), require('funnel-graph-js/src/js/graph'), require('funnel-graph-js/src/scss/main.scss'), require('funnel-graph-js/src/scss/theme.scss')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'polymorph-js', '@tweenjs/tween.js', 'funnel-graph-js', 'funnel-graph-js/src/js/number', 'funnel-graph-js/src/js/graph', 'funnel-graph-js/src/scss/main.scss', 'funnel-graph-js/src/scss/theme.scss'], factory) :
-    (global = global || self, factory(global.VueFunnelGraph = {}, global.interpolate, global.TWEEN, global.FunnelGraph, global.formatNumber, global.getDefaultColors));
-}(this, (function (exports, polymorphJs, TWEEN, FunnelGraph, number, graph) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('polymorph-js'), require('@tweenjs/tween.js'), require('funnel-graph-js'), require('funnel-graph-js/src/js/graph'), require('funnel-graph-js/src/scss/main.scss'), require('funnel-graph-js/src/scss/theme.scss')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'polymorph-js', '@tweenjs/tween.js', 'funnel-graph-js', 'funnel-graph-js/src/js/graph', 'funnel-graph-js/src/scss/main.scss', 'funnel-graph-js/src/scss/theme.scss'], factory) :
+    (global = global || self, factory(global.VueFunnelGraph = {}, global.interpolate, global.TWEEN, global.FunnelGraph, global.getDefaultColors));
+}(this, (function (exports, polymorphJs, TWEEN, FunnelGraph, graph) { 'use strict';
 
-    TWEEN = TWEEN && TWEEN.hasOwnProperty('default') ? TWEEN['default'] : TWEEN;
-    FunnelGraph = FunnelGraph && FunnelGraph.hasOwnProperty('default') ? FunnelGraph['default'] : FunnelGraph;
+    TWEEN = TWEEN && Object.prototype.hasOwnProperty.call(TWEEN, 'default') ? TWEEN['default'] : TWEEN;
+    FunnelGraph = FunnelGraph && Object.prototype.hasOwnProperty.call(FunnelGraph, 'default') ? FunnelGraph['default'] : FunnelGraph;
 
     //
 
@@ -54,9 +54,9 @@
         computed: {
             valuesFormatted: function valuesFormatted() {
                 if (this.graph.is2d()) {
-                    return this.graph.getValues2d().map(function (value) { return number.formatNumber(value); });
+                    return this.graph.getValues2d().map(function (value) { return value; });
                 }
-                return this.values.map(function (value) { return number.formatNumber(value); });
+                return this.values.map(function (value) { return value; });
             },
             colorSet: function colorSet() {
                 var colorSet = [];
@@ -218,7 +218,7 @@
         },
         filters: {
             format: function (value) {
-                return number.formatNumber(value)
+                return value
             }
         }
     };
@@ -368,11 +368,11 @@
       /* style */
       var __vue_inject_styles__ = function (inject) {
         if (!inject) { return }
-        inject("data-v-52d787cd_0", { source: ".appear-enter-active[data-v-52d787cd],.appear-leave-active[data-v-52d787cd]{transition:all .7s ease-in-out}.appear-enter-to[data-v-52d787cd],.appear-leave[data-v-52d787cd]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-52d787cd],.appear-leave-to[data-v-52d787cd]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-52d787cd],.fade-leave-active[data-v-52d787cd]{transition:all .3s ease}.fade-enter-to[data-v-52d787cd],.fade-leave[data-v-52d787cd]{opacity:1}.fade-enter[data-v-52d787cd],.fade-leave-to[data-v-52d787cd]{opacity:0}", map: undefined, media: undefined });
+        inject("data-v-4cae0a78_0", { source: ".appear-enter-active[data-v-4cae0a78],.appear-leave-active[data-v-4cae0a78]{transition:all .7s ease-in-out}.appear-enter-to[data-v-4cae0a78],.appear-leave[data-v-4cae0a78]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-4cae0a78],.appear-leave-to[data-v-4cae0a78]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-4cae0a78],.fade-leave-active[data-v-4cae0a78]{transition:all .3s ease}.fade-enter-to[data-v-4cae0a78],.fade-leave[data-v-4cae0a78]{opacity:1}.fade-enter[data-v-4cae0a78],.fade-leave-to[data-v-4cae0a78]{opacity:0}", map: undefined, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__ = "data-v-52d787cd";
+      var __vue_scope_id__ = "data-v-4cae0a78";
       /* module identifier */
       var __vue_module_identifier__ = undefined;
       /* functional template */

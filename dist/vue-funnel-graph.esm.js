@@ -1,7 +1,6 @@
 import { interpolate } from 'polymorph-js';
 import TWEEN from '@tweenjs/tween.js';
 import FunnelGraph from 'funnel-graph-js';
-import { formatNumber } from 'funnel-graph-js/src/js/number';
 import { getDefaultColors, generateLegendBackground } from 'funnel-graph-js/src/js/graph';
 import 'funnel-graph-js/src/scss/main.scss';
 import 'funnel-graph-js/src/scss/theme.scss';
@@ -53,9 +52,9 @@ var script = {
     computed: {
         valuesFormatted: function valuesFormatted() {
             if (this.graph.is2d()) {
-                return this.graph.getValues2d().map(function (value) { return formatNumber(value); });
+                return this.graph.getValues2d().map(function (value) { return value; });
             }
-            return this.values.map(function (value) { return formatNumber(value); });
+            return this.values.map(function (value) { return value; });
         },
         colorSet: function colorSet() {
             var colorSet = [];
@@ -217,7 +216,7 @@ var script = {
     },
     filters: {
         format: function (value) {
-            return formatNumber(value)
+            return value
         }
     }
 };
@@ -367,11 +366,11 @@ var __vue_staticRenderFns__ = [];
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) { return }
-    inject("data-v-52d787cd_0", { source: ".appear-enter-active[data-v-52d787cd],.appear-leave-active[data-v-52d787cd]{transition:all .7s ease-in-out}.appear-enter-to[data-v-52d787cd],.appear-leave[data-v-52d787cd]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-52d787cd],.appear-leave-to[data-v-52d787cd]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-52d787cd],.fade-leave-active[data-v-52d787cd]{transition:all .3s ease}.fade-enter-to[data-v-52d787cd],.fade-leave[data-v-52d787cd]{opacity:1}.fade-enter[data-v-52d787cd],.fade-leave-to[data-v-52d787cd]{opacity:0}", map: undefined, media: undefined });
+    inject("data-v-4cae0a78_0", { source: ".appear-enter-active[data-v-4cae0a78],.appear-leave-active[data-v-4cae0a78]{transition:all .7s ease-in-out}.appear-enter-to[data-v-4cae0a78],.appear-leave[data-v-4cae0a78]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-4cae0a78],.appear-leave-to[data-v-4cae0a78]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-4cae0a78],.fade-leave-active[data-v-4cae0a78]{transition:all .3s ease}.fade-enter-to[data-v-4cae0a78],.fade-leave[data-v-4cae0a78]{opacity:1}.fade-enter[data-v-4cae0a78],.fade-leave-to[data-v-4cae0a78]{opacity:0}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  var __vue_scope_id__ = "data-v-52d787cd";
+  var __vue_scope_id__ = "data-v-4cae0a78";
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */
