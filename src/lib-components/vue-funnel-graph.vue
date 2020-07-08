@@ -27,9 +27,9 @@
                  v-for="(value, index) in valuesFormatted" :key="labels[index].toLowerCase().split(' ').join('-')"
             >
                 <div class="label__value">{{ value }}</div>
-                <div class="label__title" v-if="labels && labels[index].toString().includes('⬇')" style="color:red;">{{ labels[index] }}</div>
-                <div class="label__title" v-else-if="labels">{{ labels[index] }}</div>
-                <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100">
+                <div class="label__title" v-if="labels && labels[index].toString().includes('⬇')" style="color:#DD2C00;">{{ labels[index] }}</div>
+                <div class="label__title" v-else-if="labels" style="color:#43A047;">{{ labels[index] }}</div>
+                <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100" style="color:#5DA8DC;">
                     {{ percentages()[index] }}%
                 </div>
                 <div class="label__segment-percentages" v-if="is2d()">
