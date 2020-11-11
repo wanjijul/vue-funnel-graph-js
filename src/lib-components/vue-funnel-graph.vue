@@ -27,10 +27,16 @@
                  v-for="(value, index) in valuesFormatted" :key="getRandom() + labels[index].toLowerCase().split(' ').join('-')"
             >
                 <div class="label__value" style="color:black;">{{ value }}</div>
-                <div class="label__title" v-if="labels && labels[index].toString().includes('⬇')" style="color:#DD2C00;">{{ labels[index] }}</div>
-                <div class="label__title" v-else-if="labels && labels[index].toString().includes('⬆')" style="color:#43A047;">{{ labels[index] }}</div>
-                <div class="label__title" v-else-if="labels" style="color:black;">{{ labels[index] }}</div>
-                <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100" style="color:#5DA8DC;">
+                <div class="label__title" v-if="labels && labels[index].toString().includes('⬇')" style="color:#DD2C00; margin-top:-4px">
+                  <i class="mdi mdi-arrow-down mdi-18px" style="position: relative; top: 2px;"></i>
+                  <span> {{ labels[index].replace('⬇','') }} </span>
+                </div>
+                <div class="label__title" v-else-if="labels && labels[index].toString().includes('⬆')" style="color:#43A047; margin-top:-4px">
+                  <i class="mdi mdi-arrow-up mdi-18px" style="position: relative; top: 2px;"></i>
+                  <span> {{ labels[index].replace('⬆','') }} </span>
+                </div>
+                <div class="label__title" v-else-if="labels" style="color:#8F9BB3;">{{ labels[index] }}</div>
+                <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100" style="color:#333333;">
                     {{ percentages()[index] }}%
                 </div>
                 <div class="label__segment-percentages" v-if="is2d()">
