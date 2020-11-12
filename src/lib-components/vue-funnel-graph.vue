@@ -5,18 +5,18 @@
                 <defs>
                     <linearGradient :id="`funnelGradient-${(index+1)}`"
                                     v-for="(colors, index) in gradientSet"
-                                    :key="index"
+                                    :key="'1' + index"
                                     :gradientTransform="gradientAngle"
                     >
                         <stop :stop-color="color"
                               :offset="offsetColor(index, colors.values.length)"
                               v-for="(color, index) in colors.values"
-                              :key="index"
+                              :key="'2' + index"
                         ></stop>
                     </linearGradient>
                 </defs>
                 <path :fill="colorSet[index].fill" :stroke="colorSet[index].fill"
-                      :d="path" v-for="(path, index) in paths" :key="index"
+                      :d="path" v-for="(path, index) in paths" :key="'3' + index"
                 ></path>
             </svg>
         </div>
@@ -24,18 +24,24 @@
                           v-on:enter="enterTransition" v-on:leave="leaveTransition"
         >
             <div class="svg-funnel-js__label" :class="`label-${(index+1)}`"
-                 v-for="(value, index) in valuesFormatted" :key="labels[index].toLowerCase().split(' ').join('-')"
+                 v-for="(value, index) in valuesFormatted" :key="getRandom() + labels[index].toLowerCase().split(' ').join('-')"
             >
                 <div class="label__value" style="color:black;">{{ value }}</div>
-                <div class="label__title" v-if="labels && labels[index].toString().includes('⬇')" style="color:#DD2C00;">{{ labels[index] }}</div>
-                <div class="label__title" v-else-if="labels && labels[index].toString().includes('⬆')" style="color:#43A047;">{{ labels[index] }}</div>
-                <div class="label__title" v-else-if="labels" style="color:black;">{{ labels[index] }}</div>
-                <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100" style="color:#5DA8DC;">
+                <div class="label__title" v-if="labels && labels[index].toString().includes('⬇')" style="color:#DD2C00; margin-top:-4px">
+                  <i class="mdi mdi-arrow-down mdi-18px" style="position: relative; top: 2px;"></i>
+                  <span> {{ labels[index].replace('⬇','') }} </span>
+                </div>
+                <div class="label__title" v-else-if="labels && labels[index].toString().includes('⬆')" style="color:#43A047; margin-top:-4px">
+                  <i class="mdi mdi-arrow-up mdi-18px" style="position: relative; top: 2px;"></i>
+                  <span> {{ labels[index].replace('⬆','') }} </span>
+                </div>
+                <div class="label__title" v-else-if="labels" style="color:#8F9BB3;">{{ labels[index] }}</div>
+                <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100" style="color:#333333;">
                     {{ percentages()[index] }}%
                 </div>
                 <div class="label__segment-percentages" v-if="is2d()">
                     <ul class="segment-percentage__list">
-                        <li v-for="(subLabel, j) in subLabels" :key="j">
+                        <li v-for="(subLabel, j) in subLabels" :key="'5' + j">
                             {{ subLabel }}:
                             <span class="percentage__list-label" v-if="subLabelValue === 'percent'">{{ twoDimPercentages()[index][j] }}%</span>
                             <span class="percentage__list-label" v-else>{{ values[index][j] | format }}</span>
@@ -148,6 +154,9 @@
             }
         },
         methods: {
+            getRandom() {
+              return Math.random()
+            },
             enterTransition(el, done) {
                 if (!this.animated) done();
                 setTimeout(() => done(), 700);
