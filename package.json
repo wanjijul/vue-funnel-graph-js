@@ -40,7 +40,6 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife --file dist/vue-funnel-graph.min.js"
   },
   "dependencies": {
-    "@mdi/font": "^5.8.55",
     "@tweenjs/tween.js": "^17.4.0",
     "funnel-graph-js": "^1.4.1",
     "node-sass": "^4.13.1",
